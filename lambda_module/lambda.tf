@@ -33,7 +33,7 @@ data "null_data_source" "packaging_changes" {
 }
 
 data "archive_file" "lambda" {
-  depends_on  = ["null_resource.packaging"]
+  depends_on  = [null_resource.packaging]
   type        = "zip"
   source_dir  = "/tmp/${var.temp_package_folder}"
   output_path = data.null_data_source.packaging_changes.outputs["package_path"]
