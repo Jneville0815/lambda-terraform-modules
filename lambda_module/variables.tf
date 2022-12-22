@@ -28,6 +28,10 @@ variable "temp_package_folder" {
   default = "python_lambda_package"
 }
 
+variable "script_directory" {
+  type = string
+}
+
 variable "global" {
   type = object({
     repository_name = string

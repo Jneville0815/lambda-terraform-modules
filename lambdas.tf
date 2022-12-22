@@ -1,6 +1,7 @@
 module "quote_text" {
   source                 = "./lambda_module"
   function_name          = "quote_text"
+  script_directory       = "${path.module}/lambdas/quote_text"
   function_description   = "Sends daily texts from database of quotes"
   function_cron_schedule = "rate(1 day)"
   pip_dependencies       = ["twilio==7.16.0"]

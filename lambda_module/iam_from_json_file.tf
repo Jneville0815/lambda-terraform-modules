@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "lambda_assume_role" {
 
 resource "aws_iam_policy" "lambda_iam_policy_from_json_file" {
   name   = "${var.function_name}_lambda_iam_role_policy_${var.global.aws_region}"
-  policy = templatefile("${path.module}/../lambdas/${var.function_name}/iam_policy.json", merge(var.iam_policy_vars, { cloudwatch_logs_group_lambda_arn = aws_cloudwatch_log_group.lambda.arn }))
+  policy = templatefile("${var.script_directory}/iam_policy.json", merge(var.iam_policy_vars, { cloudwatch_logs_group_lambda_arn = aws_cloudwatch_log_group.lambda.arn }))
 }
 
 resource "aws_iam_role" "lambda_iam_role" {

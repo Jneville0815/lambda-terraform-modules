@@ -1,7 +1,7 @@
 resource "null_resource" "packaging" {
   triggers = {
     dependencies = join(" ", var.pip_dependencies)
-    script_sha1  = sha1(file("${path.module}/../lambdas/${var.function_name}/${var.function_name}.py"))
+    script_sha1  = sha1(file("${var.script_directory}/${var.function_name}.py"))
   }
 
   # clean the folder
@@ -21,14 +21,14 @@ resource "null_resource" "packaging" {
 
   # copy your script to the folder
   provisioner "local-exec" {
-    command = "cp ${path.module}/../lambdas/${var.function_name}/${var.function_name}.py /tmp/${var.temp_package_folder}/"
+    command = "cp ${var.script_directory}/${var.function_name}.py /tmp/${var.temp_package_folder}/"
   }
 }
 
 data "null_data_source" "packaging_changes" {
   inputs = {
     null_id      = null_resource.packaging.id
-    package_path = "${path.module}/../lambdas/${var.function_name}/${var.function_name}.zip"
+    package_path = "${var.script_directory}/${var.function_name}.zip"
   }
 }
 
