@@ -1,0 +1,14 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+	{
+	  "Sid": "",
+	  "Effect": "Allow",
+	  "Action": [
+		"logs:PutLogEvents",
+		"logs:CreateLogStream"
+	  ],
+	  "Resource": "${cloudwatch_logs_group_lambda_arn}:*"
+	}
+  ]
+}
