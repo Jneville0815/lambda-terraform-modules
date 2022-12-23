@@ -9,6 +9,8 @@ module "quote_text" {
     TWILIO_AUTH_TOKEN   = data.aws_ssm_parameter.twilio_auth_token.value
     TWILIO_ACCOUNT_SID  = data.aws_ssm_parameter.twilio_account_sid.value
     TWILIO_PHONE_NUMBER = data.aws_ssm_parameter.twilio_phone_number.value
+    EMAIL               = data.aws_ssm_parameter.website_email.value
+    PASSWORD            = data.aws_ssm_parameter.website_password.value
   }
   global = local.global
 }
