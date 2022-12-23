@@ -11,7 +11,7 @@ def lambda_handler(event, context):
 
     client = Client(account_sid, auth_token)
     http = urllib3.PoolManager()
-    res = http.request('GET', 'https://3cl6ts0f6f.execute-api.us-east-1.amazonaws.com/production/api/userInfo/jimmyeneville@gmail.com/getQuote')
+    res = http.request('GET', 'https://3cl6ts0f6f.execute-api.us-east-1.amazonaws.com/production/api/userInfo/611132dcc9005d62bcfe9922/getQuote')
     json_res = json.loads(res.data.decode('utf-8'))
 
     message = client.messages \
