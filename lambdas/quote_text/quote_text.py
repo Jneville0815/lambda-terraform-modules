@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     email = os.environ['EMAIL']
     password = os.environ['PASSWORD']
 
-    backend_endpoint = 'https://3cl6ts0f6f.execute-api.us-east-1.amazonaws.com/production/api'
+    backend_endpoint = 'https://ogby0w3cuj.execute-api.us-east-1.amazonaws.com/production/api'
 
     client = Client(account_sid, auth_token)
     http = urllib3.PoolManager()
