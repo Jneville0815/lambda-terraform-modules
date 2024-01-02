@@ -3,7 +3,7 @@ module "quote_text" {
   function_name          = "quote_text"
   script_directory       = "${path.module}/lambdas/quote_text"
   function_description   = "Sends daily texts from database of quotes"
-  function_cron_schedule = "rate(1 day)"
+  function_cron_schedule = "cron(0 12,0 * * ? *)"
   pip_dependencies       = ["twilio==7.16.0"]
   lambda_env_vars = {
     TWILIO_AUTH_TOKEN   = data.aws_ssm_parameter.twilio_auth_token.value
