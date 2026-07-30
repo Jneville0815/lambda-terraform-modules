@@ -6,11 +6,15 @@ module "quote_text" {
   function_cron_schedule = "cron(0 12,0 * * ? *)"
   pip_dependencies       = ["twilio==7.16.0"]
   lambda_env_vars = {
-    TWILIO_AUTH_TOKEN   = data.aws_ssm_parameter.twilio_auth_token.value
-    TWILIO_ACCOUNT_SID  = data.aws_ssm_parameter.twilio_account_sid.value
-    TWILIO_PHONE_NUMBER = data.aws_ssm_parameter.twilio_phone_number.value
-    EMAIL               = data.aws_ssm_parameter.website_email.value
-    PASSWORD            = data.aws_ssm_parameter.website_password.value
+    TWILIO_AUTH_TOKEN      = data.aws_ssm_parameter.twilio_auth_token.value
+    TWILIO_ACCOUNT_SID     = data.aws_ssm_parameter.twilio_account_sid.value
+    TWILIO_PHONE_NUMBER    = data.aws_ssm_parameter.twilio_phone_number.value
+    EMAIL                  = data.aws_ssm_parameter.website_email.value
+    PASSWORD               = data.aws_ssm_parameter.website_password.value
+    BACKEND_ENDPOINT       = data.aws_ssm_parameter.quote_backend_endpoint.value
+    RECIPIENT_PHONE_NUMBER = data.aws_ssm_parameter.recipient_phone_number.value
+    REMINDER_PHONE_NUMBER  = data.aws_ssm_parameter.reminder_phone_number.value
+    REMINDER_MESSAGE       = data.aws_ssm_parameter.reminder_message.value
   }
   global = local.global
 }

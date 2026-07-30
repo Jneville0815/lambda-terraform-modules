@@ -11,8 +11,13 @@ def lambda_handler(event, context):
     twilio_number = os.environ['TWILIO_PHONE_NUMBER']
     email = os.environ['EMAIL']
     password = os.environ['PASSWORD']
+    recipient_number = os.environ['RECIPIENT_PHONE_NUMBER']
+    backend_endpoint = os.environ['BACKEND_ENDPOINT']
 
-    backend_endpoint = 'https://ogby0w3cuj.execute-api.us-east-1.amazonaws.com/production/api'
+    # Optional second recipient. Both must be set for anything to be sent.
+    reminder_number = os.environ.get('REMINDER_PHONE_NUMBER')
+    reminder_message = os.environ.get('REMINDER_MESSAGE')
+    reminder_chance = float(os.environ.get('REMINDER_CHANCE', '0.10'))
 
     client = Client(account_sid, auth_token)
     http = urllib3.PoolManager()
@@ -31,17 +36,17 @@ def lambda_handler(event, context):
         .create(
         body=f"{json_res['source']}: {json_res['quote']}",
         from_=twilio_number,
-        to='+1XXXXXXXXXX'
+        to=recipient_number
     )
 
     print(f"Text message sent (Message: {message.body}. Error: {message.error_message})")
 
-    if random.random() < 0.10:
+    if reminder_number and reminder_message and random.random() < reminder_chance:
         message = client.messages \
             .create(
-            body="REDACTED",
+            body=reminder_message,
             from_=twilio_number,
-            to='+1YYYYYYYYYY'
+            to=reminder_number
         )
 
         print(f"Text message sent (Message: {message.body}. Error: {message.error_message})")
